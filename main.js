@@ -1,24 +1,23 @@
 // Lines -> particules
 
+//Pour augmenter fréquence signal : augnmenter le nombre de particules ou le time
+//Pour augmenter amplitude signal : augmenter l'amplitude du noise
+
 const canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     simplex = new SimplexNoise(),
-    nbParticle = 8,
-    nbLine = 4
+    nbParticle = 100,
+    nbLine = 8
 ;
 
 let lines = [],
-    lastCoords,
-    time = 0;
+time = 0;
 
 
 function updateFrame(){
     requestAnimationFrame(updateFrame);
 
-
     ctx.clearRect(0,0, canvas.width, canvas.height);
-
-    lastCoords = [];
 
 
     //Render lines
@@ -44,18 +43,26 @@ function updateFrame(){
 
 function init() {
 
-let ecart = 100;
+let gapYLine = (canvas.height / (nbLine + 1));
+let angleStart = 0;
+
+
+console.log(gapYLine);
 
     //Create lines
     for (let i = 0; i < nbLine; i++) {
-        let line = new Line(nbParticle, ecart, 'white');
+        let line = new Line(nbParticle, gapYLine, 'white', angleStart); //nbParticle, baseY, color, angleStart
         line.createPoints();
         line.render();
         lines.push(line);
-        ecart += 100;
+        gapYLine += (canvas.height / (nbLine + 1 ));
+        angleStart+= 1.5;
     }
 
-    console.log(lines);
+    //console.log(lines[0].nbParticle);
+
+
+
 
    //drawLastToFirst();
 
@@ -63,19 +70,6 @@ let ecart = 100;
 }
 
 
-/*
-
-function drawLastToFirst() {
-    ctx.beginPath();
-    ctx.save();
-    ctx.strokeStyle = 'white';
-    ctx.moveTo(particles[particles.length - 1].x, particles[particles.length - 1].y);
-    ctx.lineTo(particles[0].x, particles[0].y);
-    ctx.stroke();
-    ctx.restore();
-    ctx.closePath();
-}
-*/
 
 
 init();

@@ -1,18 +1,21 @@
-function Line(nbParticle, baseY, color) {
+function Line(nbParticle, baseY, color, angleStart) {
     this.nbParticle = nbParticle;
     this.baseY = baseY;
     this.color = color;
     this.particles = [];
-    this.gapXParticle = 0;
+    this.gapXParticle = 0,
+    this.angleStart = angleStart;
 }
 
 Line.prototype = {
 
     createPoints : function () {
-        let angle = 0;
+
+        let angle = this.angleStart;
+        console.log(angle);
         for (let i = 0; i < this.nbParticle + 1; i++ ) {
             angle+= 0.1;
-            let particle = new Particle(this.baseY, this.gapXParticle, angle, 250, this.color);
+            let particle = new Particle(this.gapXParticle, this.baseY, angle, 0, this.color);
             this.particles.push(particle);
             this.gapXParticle += (canvas.width / nbParticle );
         }
@@ -36,10 +39,13 @@ Line.prototype = {
     },
 
     render : function () {
-  //        console.log(this.nbParticle);
+
+        //Render and update particles
         for (let i = 0; i < this.nbParticle + 1; i++ ) {
             let p = this.particles[i];
-            p.update();
+            //Todo : faire passer en paramètre time et amplitude ?
+            p.update(0.0005);
+
             p.render();
         }
 
@@ -47,9 +53,4 @@ Line.prototype = {
 
     },
 
-   /* update : function() {
-        for(let i = 0; i < this.particles.length; i ++) {
-            particle =
-        }
-    }*/
 };

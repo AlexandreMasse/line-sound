@@ -14,13 +14,21 @@
       background-color: black;
     }
 
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     canvas {
-     border: 1px solid white;
+    border-left: 1px solid white;
+     border-right: 1px solid white;
+
     }
 
   </style>
   <body>
-    <canvas id="canvas" width="800" height="700"></canvas>
+    <canvas id="canvas" width="1000" height="800"></canvas>
 
     <script src="simplex-noise.js"></script>
     <script src="particle.js"></script>
