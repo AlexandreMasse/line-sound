@@ -3,7 +3,7 @@ function Line(nbParticle, baseY, color) {
     this.baseY = baseY;
     this.color = color;
     this.particles = [];
-    this.ecartParticle = 0;
+    this.gapXParticle = 0;
 }
 
 Line.prototype = {
@@ -12,10 +12,27 @@ Line.prototype = {
         let angle = 0;
         for (let i = 0; i < this.nbParticle + 1; i++ ) {
             angle+= 0.1;
-            let particle = new Particle(this.baseY, this.ecartParticle, angle, 250, this.color);
+            let particle = new Particle(this.baseY, this.gapXParticle, angle, 250, this.color);
             this.particles.push(particle);
-            this.ecartParticle += (canvas.width / nbParticle );
+            this.gapXParticle += (canvas.width / nbParticle );
         }
+    },
+
+    linesBetweenPoints : function() {
+
+        ctx.beginPath();
+        ctx.save();
+
+        ctx.strokeStyle = this.color;
+
+        for (let i = 0; i < this.particles.length - 1 ; i++) {
+            ctx.moveTo(this.particles[i].x, this.particles[i].y);
+            ctx.lineTo(this.particles[i+1].x, this.particles[i+1].y)
+        }
+
+        ctx.stroke();
+        ctx.restore();
+        ctx.closePath();
     },
 
     render : function () {
@@ -26,14 +43,8 @@ Line.prototype = {
             p.render();
         }
 
+        this.linesBetweenPoints();
 
-    //TODO : relier les particules
-
-
-    //    console.log(particles)
-
-     //   this.lines.push(particles);
-        //console.log(lines);
     },
 
    /* update : function() {

@@ -38,10 +38,12 @@ Particle.prototype = {
         }
 
 
-        ctx.strokeStyle = "white";
+       /*
+       ctx.strokeStyle = "white";
         ctx.moveTo(lastCoords.x, lastCoords.y);
         ctx.lineTo(this.x, this.y);
         ctx.stroke();
+        */
 
 
 

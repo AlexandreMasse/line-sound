@@ -21,6 +21,7 @@ function updateFrame(){
     lastCoords = [];
 
 
+    //Render lines
     for(let i= 0; i < nbLine; i++ ){
         let line = lines[i];
 
@@ -45,9 +46,9 @@ function init() {
 
 let ecart = 100;
 
-    //Creation des lignes
+    //Create lines
     for (let i = 0; i < nbLine; i++) {
-        let line = new Line(nbParticle, ecart, 'red');
+        let line = new Line(nbParticle, ecart, 'white');
         line.createPoints();
         line.render();
         lines.push(line);
