@@ -7,7 +7,7 @@ const canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     simplex = new SimplexNoise(),
     nbParticle = 100,
-    nbLine = 4;
+    nbLine = 10;
 
 let lines = [],
     audio,
@@ -29,12 +29,44 @@ function updateFrame(){
 
 
 
+    //Caculate average for each line
+    const allData = audio.getFrequencyData();
+    const everageData = [];
+
+
+    for(let i= 0; i < nbLine; i++ ){
+        let everageCurrent = 0;
+        let cumul = 0;
+        //let compteur = 0;
+
+        let debut = Math.floor( ((allData.length - 1) / nbLine) * i );
+        let fin = Math.floor( ((allData.length - 1) / nbLine) * (i + 1) );
+
+        for(let j = debut; j < fin; j++) {
+            //compteur++
+            cumul += allData[j];
+        }
+
+        //console.log('Line : ' + i + ' compteur : ' + compteur);
+        //console.log('Line : ' + i + ' début : ' + debut + ' fin : ' + fin);
+
+        everageCurrent = cumul / 255;
+
+        everageData.push(everageCurrent);
+
+    }
+
+    //console.log(everageData);
+
+
     //Render lines
     for(let i= 0; i < nbLine; i++ ){
         let line = lines[i];
 
         line.render();
     }
+
+
 
     /*for(let i = 0; i < lines[0].particles.length; i++) {
 
@@ -44,6 +76,7 @@ function updateFrame(){
         particle.render();
 
     }*/
+
 
 
     //drawLastToFirst();
