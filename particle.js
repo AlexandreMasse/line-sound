@@ -4,7 +4,7 @@ function Particle(baseX, baseY, angle, radius, color){
     this.baseY = baseY;
     this.angle = angle;
     this.radius = radius;
-    this.amplitude = 25;
+    this.amplitude = 20;
     this.color = color;
     this.incrementTime = 0.0005;
 

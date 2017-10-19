@@ -5,6 +5,9 @@ function Line(nbParticle, baseY, color, angleStart) {
     this.particles = [];
     this.gapXParticle = 0,
     this.angleStart = angleStart;
+
+    this.DELTA_TIME = 0;
+    this.LAST_TIME = Date.now();
 }
 
 Line.prototype = {

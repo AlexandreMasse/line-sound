@@ -7,17 +7,26 @@ const canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     simplex = new SimplexNoise(),
     nbParticle = 100,
-    nbLine = 8
-;
+    nbLine = 8;
 
 let lines = [],
-time = 0;
+    audio,
+    time = 0;
 
 
 function updateFrame(){
+
     requestAnimationFrame(updateFrame);
 
-    ctx.clearRect(0,0, canvas.width, canvas.height);
+    //ctx.clearRect(0,0, canvas.width, canvas.height);
+    //ctx.beginPath();
+    //ctx.save();
+    ctx.fillStyle = 'rgba(0,0,0, 0.7)';
+    ctx.fillRect(0,0, canvas.width, canvas.height);
+
+    //ctx.restore();
+    //ctx.closePath();
+
 
 
     //Render lines
@@ -38,16 +47,21 @@ function updateFrame(){
 
 
     //drawLastToFirst();
+
+    //console.log(audio.getFrequencyData());
 }
 
 
 function init() {
 
-let gapYLine = (canvas.height / (nbLine + 1));
-let angleStart = 0;
+    let gapYLine = (canvas.height / (nbLine + 1));
+    let angleStart = 0;
+
+    audio = new Audio();
+    audio.loadSound('./audio/sound.mp3');
 
 
-console.log(gapYLine);
+    console.log(gapYLine);
 
     //Create lines
     for (let i = 0; i < nbLine; i++) {
