@@ -1,17 +1,41 @@
-// Lines -> particules
-
-//Pour augmenter fréquence signal : augnmenter le nombre de particules ou le time
-//Pour augmenter amplitude signal : augmenter l'amplitude du noise
-
 const canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     simplex = new SimplexNoise(),
-    nbParticle = 15,
-    nbLine = 5;
+   //audioElement = document.getElementById('audioElement'),
+    nbParticle = 40,
+    nbLine = 20,
+    amplitudeMult = 0.3;
 
-let lines = [],
+
+let canvasWidth,
+    canvasHeight,
+    lines = [],
     audio,
+    allData = [];
     time = 0;
+
+
+function initCanvasSize() {
+    canvasWidth = window.innerWidth * 0.8;
+    canvasHeight = window.innerHeight * 0.8;
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasHeight + 'px';
+}
+
+
+function onResize() {
+
+    //Resize canvas
+    initCanvasSize();
+
+    //Create New Lines
+    initLines();
+}
+
 
 
 function updateFrame(){
@@ -21,29 +45,35 @@ function updateFrame(){
     //ctx.clearRect(0,0, canvas.width, canvas.height);
     //ctx.beginPath();
     //ctx.save();
-    ctx.fillStyle = 'rgba(0,0,0, 0.2)';
-    ctx.fillRect(0,0, canvas.width, canvas.height);
+
+    //Fade effect
+    ctx.fillStyle = 'rgba(0,0,0, 0.15)';
+    ctx.fillRect(0,0, canvasWidth, canvasHeight);
 
     //ctx.restore();
     //ctx.closePath();
 
 
 
-    //Caculate average for each line
-    const allData = audio.getFrequencyData();
-    const everageData = [];
+   //Get Data
+    allData = audio.getFrequencyData();
 
+    //Remove Highest Frequency Data (20%)
+    //allData = allData.splice(Math.floor((allData.length - 1) * 0.8 ));
+
+    //console.log(allData);
+
+    //Caculate average for each line
+    const everageData = [];
 
     for(let i= 0; i < nbLine; i++ ){
         let everageCurrent = 0;
         let cumul = 0;
-        //let compteur = 0;
 
         let debut = Math.floor( ((allData.length - 1) / nbLine) * i );
         let fin = Math.floor( ((allData.length - 1) / nbLine) * (i + 1) );
 
         for(let j = debut; j < fin; j++) {
-            //compteur++
             cumul += allData[j];
         }
 
@@ -53,11 +83,9 @@ function updateFrame(){
         everageCurrent = cumul / (fin - debut);
 
         everageData.push(everageCurrent);
-
     }
 
     //console.log(everageData);
-
 
     //Render lines
     for(let i= 0; i < nbLine; i++ ){
@@ -68,35 +96,21 @@ function updateFrame(){
         line.render(everageData[i]);
     }
 
-
-
-    /*for(let i = 0; i < lines[0].particles.length; i++) {
-
-        let particle = particles[i];
-
-        particle.update();
-        particle.render();
-
-    }*/
-
-
-
-    //drawLastToFirst();
-
-    //console.log(audio.getFrequencyData());
 }
 
 
-function init() {
+function initLines() {
+    //Delete current Lines
+    lines = [];
 
-    let gapYLine = (canvas.height / (nbLine + 1));
+    let marginTopBottom = 70;
+
+    if (marginTopBottom > canvasHeight) {
+        marginTopBottom = canvasHeight
+    }
+
+    let gapYLine = marginTopBottom;
     let angleStart = 0;
-
-    audio = new Audio();
-    audio.loadSound('./audio/sound.mp3');
-
-
-    console.log(gapYLine);
 
     //Create lines
     for (let i = 0; i < nbLine; i++) {
@@ -104,21 +118,25 @@ function init() {
         line.createPoints();
         line.render();
         lines.push(line);
-        gapYLine += (canvas.height / (nbLine + 1 ));
+        gapYLine += ( (canvasHeight - (marginTopBottom * 2) ) / (nbLine - 1) );
         angleStart+= 1.5;
     }
-
-    //console.log(lines[0].nbParticle);
-
-
-
-
-   //drawLastToFirst();
-
-   updateFrame();
 }
 
 
+function init() {
+
+    audio = new Audio();
+    audio.loadSound('./audio/sound.mp3');
+
+    initCanvasSize();
+
+    initLines();
+
+    window.addEventListener( 'resize', onResize);
+
+   updateFrame();
+}
 
 
 init();

@@ -8,7 +8,7 @@ function Audio() {
     this.analyser = this.audioCtx.createAnalyser();
     this.analyser.minDecibels = -110;
 
-    this.analyser.fftSize = 512;
+    this.analyser.fftSize = 1024;
     this.bufferSize = this.analyser.frequencyBinCount;
 
     //Create array of datd
@@ -30,10 +30,12 @@ Audio.prototype = {
 
                 // success callback
                 this.audioBuffer = buffer;
+                console.log(this.audioBuffer);
 
                 // Create sound from buffer
                 this.audioSource = this.audioCtx.createBufferSource();
                 this.audioSource.buffer = this.audioBuffer;
+
 
                 // connect the audio source to context's output
                 this.audioSource.connect( this.analyser );
@@ -60,13 +62,15 @@ Audio.prototype = {
     getFrequencyData : function(){
 
         //rafId = requestAnimationFrame( this.frame );
+        //this.DELTA_TIME = Date.now() - this.LAST_TIME;
+        //this.LAST_TIME = Date.now();
 
-        this.DELTA_TIME = Date.now() - this.LAST_TIME;
-        this.LAST_TIME = Date.now();
-
-        // analyser.getByteFrequencyData(frequencyData);
 
         this.analyser.getByteFrequencyData(this.frequencyData);
+
+        //Remove Highest Frequency Data (20%)
+        //this.frequencyData.splice(Math.floor((this.frequencyData.length - 1) * 0.8 ));
+
         return this.frequencyData;
     },
 

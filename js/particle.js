@@ -4,12 +4,12 @@ function Particle(baseX, baseY, angle, radius, color){
     this.baseY = baseY;
     this.angle = angle;
     this.radius = radius;
-    this.amplitude = 0;
+    this.amplitudeBase = 0;
     this.color = color;
     this.incrementTime = 0.0005;
 
 
-    this.noise = simplex.noise2D(Math.cos(this.angle), Math.sin(this.angle)) * this.amplitude;
+    this.noise = simplex.noise2D(Math.cos(this.angle), Math.sin(this.angle)) * this.amplitudeBase;
 
     this.x = this.baseX;
 
@@ -34,16 +34,14 @@ Particle.prototype = {
 
     },
 
-    //Todo: faire passer en paramètre time et amplitude pour les faire varier avec web audio api ?
+
     update : function (everageNumber) {
 
-        //console.log(everageNumber);
-        //Todo : a changer en fonction de la web audio api
-       time += 0.0005 / nbLine;
+       time += this.incrementTime / nbLine;
         //time += this.everageNumberTime / nbLine;
 
 
-        this.noise = simplex.noise2D(Math.cos(this.angle) + ( time + everageNumber / 200 ), Math.sin(this.angle) + (time + everageNumber / 200 )) * (this.amplitude + (everageNumber / 3 ));
+        this.noise = simplex.noise2D(Math.cos(this.angle) + ( time + everageNumber / 150 ), Math.sin(this.angle) + (time + everageNumber / 150 )) * (this.amplitudeBase + (everageNumber * amplitudeMult));
 
         this.x = this.baseX;
         this.y = this.baseY + this.noise ;

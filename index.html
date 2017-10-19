@@ -21,14 +21,21 @@
     }
 
     canvas {
-    border-left: 1px solid white;
-     border-right: 1px solid white;
-
+      border-left: 1px solid white;
+      border-right: 1px solid white;
     }
+
+    audio{
+      display: none;
+    }
+
 
   </style>
   <body>
-    <canvas id="canvas" width="700" height="600"></canvas>
+    <div class="container">
+      <canvas id="canvas" width="700" height="600"></canvas>
+      <audio src="/audio/sound.mp3" controls id="audioElement"></audio>
+    </div>
 
 
 
@@ -40,11 +47,11 @@
     <script src="lib/spotify-web-api.js"></script>
 
 
-    <script src="particle.js"></script>
-    <script src="line.js"></script>
-    <script src="audio.js"></script>
+    <script src="js/particle.js"></script>
+    <script src="js/line.js"></script>
+    <script src="js/audio.js"></script>
 
 
-    <script src="main.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

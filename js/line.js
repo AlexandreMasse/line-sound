@@ -20,7 +20,7 @@ Line.prototype = {
             angle+= 0.1;
             let particle = new Particle(this.gapXParticle, this.baseY, angle, 0, this.color);
             this.particles.push(particle);
-            this.gapXParticle += (canvas.width / nbParticle );
+            this.gapXParticle += (canvasWidth / nbParticle );
         }
     },
 
@@ -36,6 +36,8 @@ Line.prototype = {
             ctx.lineTo(this.particles[i+1].x, this.particles[i+1].y)
         }
 
+        ctx.lineWidth = 1;
+
         ctx.stroke();
         ctx.restore();
         ctx.closePath();
@@ -47,14 +49,12 @@ Line.prototype = {
 
         //Render and update particles
         for (let i = 0; i < this.nbParticle + 1; i++ ) {
-            let p = this.particles[i];
+            let particle = this.particles[i];
 
 
+            particle.update(everageNumber);
 
-            //Todo : faire passer en paramètre time et amplitude ?
-            p.update(everageNumber);
-
-            p.render();
+            particle.render();
         }
 
         this.linesBetweenPoints();
