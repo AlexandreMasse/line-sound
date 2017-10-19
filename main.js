@@ -7,7 +7,7 @@ const canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     simplex = new SimplexNoise(),
     nbParticle = 100,
-    nbLine = 8;
+    nbLine = 4;
 
 let lines = [],
     audio,
@@ -21,7 +21,7 @@ function updateFrame(){
     //ctx.clearRect(0,0, canvas.width, canvas.height);
     //ctx.beginPath();
     //ctx.save();
-    ctx.fillStyle = 'rgba(0,0,0, 0.7)';
+    ctx.fillStyle = 'rgba(0,0,0, 0.2)';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
     //ctx.restore();

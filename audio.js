@@ -6,7 +6,12 @@ function Audio() {
     //this.audioBuffer;
     //this.audioSource;
     this.analyser = this.audioCtx.createAnalyser();
-    this.frequencyData = new Uint8Array(this.analyser.frequencyBinCount);
+
+    this.analyser.fftSize = 512;
+    this.bufferSize = this.analyser.frequencyBinCount;
+
+    //Create array of datd
+    this.frequencyData = new Uint8Array(this.bufferSize);
 
 }
 
