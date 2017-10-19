@@ -6,6 +6,7 @@ function Audio() {
     //this.audioBuffer;
     //this.audioSource;
     this.analyser = this.audioCtx.createAnalyser();
+    this.analyser.minDecibels = -110;
 
     this.analyser.fftSize = 512;
     this.bufferSize = this.analyser.frequencyBinCount;

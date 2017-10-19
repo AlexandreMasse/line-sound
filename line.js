@@ -41,13 +41,18 @@ Line.prototype = {
         ctx.closePath();
     },
 
-    render : function () {
+    render : function (everageNumber) {
+
+        //console.log(everageNumber);
 
         //Render and update particles
         for (let i = 0; i < this.nbParticle + 1; i++ ) {
             let p = this.particles[i];
+
+
+
             //Todo : faire passer en paramètre time et amplitude ?
-            p.update(0.0005);
+            p.update(everageNumber);
 
             p.render();
         }
