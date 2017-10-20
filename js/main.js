@@ -31,6 +31,8 @@ function initCanvasSize() {
 
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
+    //canvasWidth = canvas.width ;
+   //canvasHeight = canvas.height;
 
     canvas.style.width = canvasWidth + 'px';
     canvas.style.height = canvasHeight + 'px';
@@ -47,7 +49,6 @@ function onResize() {
     //Create New Lines
     initLines();
 }
-
 
 
 function updateFrame(){
@@ -74,8 +75,6 @@ function updateFrame(){
     //Remove Highest Frequency Data (10%)
     allData = allData.slice(0, Math.floor((allData.length - 1) * 0.90 ));
 
-    console.log(allData);
-    //console.log(allData);
 
     //Caculate average for each line
     const everageData = [];
@@ -119,7 +118,6 @@ function initLines() {
     lines = [];
 
 
-
     var gapYLine = marginTopBottom;
 
     //Center line if she is alone
@@ -127,9 +125,7 @@ function initLines() {
         gapYLine = canvasHeight / 2;
     }
 
-
     let angleStart = 0;
-
 
     //Create lines
     for (let i = 0; i < nbLine; i++) {
@@ -219,5 +215,9 @@ function init() {
 }
 
 
-init();
+setTimeout(function () {
+    init();
+}, 1500);
+
+
 
