@@ -67,18 +67,21 @@ function updateFrame(){
 
 
 
-   //Get Data
+    //Get Data
     allData = audio.getFrequencyData();
 
-    //Remove Highest Frequency Data (20%)
-    //allData = allData.splice(Math.floor((allData.length - 1) * 0.8 ));
 
+    //Remove Highest Frequency Data (10%)
+    allData = allData.slice(0, Math.floor((allData.length - 1) * 0.90 ));
+
+    console.log(allData);
     //console.log(allData);
 
     //Caculate average for each line
     const everageData = [];
 
-    for(let i= 0; i < nbLine; i++ ){
+    for(let i = 0; i < nbLine; i++ ){
+
         let everageCurrent = 0;
         let cumul = 0;
 
@@ -200,6 +203,8 @@ function init() {
 
     audio = new Audio();
     audio.loadSound('./audio/sound.mp3');
+
+
 
     initCanvasSize();
 
