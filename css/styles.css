@@ -1,0 +1,42 @@
+body, html {
+    margin : 0;
+    padding : 0;
+    width : 100%;
+    height : 100%;
+    background-color: black;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+}
+
+canvas {
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+
+
+#sliders-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+#sliders-container > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 30px;
+}
+
+
+
+
+audio{
+    display: none;
+}
+

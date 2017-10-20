@@ -1,10 +1,9 @@
 const canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     simplex = new SimplexNoise(),
+    nbLineSlider = document.getElementById("nb-line"),
+    marginSlider = document.getElementById("margin-top-bottom");
    //audioElement = document.getElementById('audioElement'),
-    nbParticle = 40,
-    nbLine = 20,
-    amplitudeMult = 0.3;
 
 
 let canvasWidth,
@@ -12,12 +11,17 @@ let canvasWidth,
     lines = [],
     audio,
     allData = [];
-    time = 0;
+    time = 0,
+    nbParticle = 40,
+    amplitudeMult = 0.3;
+
+var nbLine = 2,
+    marginTopBottom = 15;
 
 
 function initCanvasSize() {
-    canvasWidth = window.innerWidth * 0.8;
-    canvasHeight = window.innerHeight * 0.8;
+    canvasWidth = window.innerWidth * 0.7;
+    canvasHeight = window.innerHeight * 0.7;
 
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
@@ -31,6 +35,8 @@ function onResize() {
 
     //Resize canvas
     initCanvasSize();
+
+    initSlider();
 
     //Create New Lines
     initLines();
@@ -103,14 +109,15 @@ function initLines() {
     //Delete current Lines
     lines = [];
 
-    let marginTopBottom = 70;
-
-    if (marginTopBottom > canvasHeight) {
+   /* if (marginTopBottom > canvasHeight) {
         marginTopBottom = canvasHeight
-    }
+    }*/
 
     let gapYLine = marginTopBottom;
     let angleStart = 0;
+
+
+    console.log(typeof gapYLine);
 
     //Create lines
     for (let i = 0; i < nbLine; i++) {
@@ -124,6 +131,35 @@ function initLines() {
 }
 
 
+function initSlider() {
+
+    nbLineSlider.value = nbLine;
+
+    marginSlider.value = marginTopBottom;
+    marginSlider.max = canvasHeight;
+
+}
+
+
+function initEvent() {
+
+    window.addEventListener('resize', onResize);
+
+    nbLineSlider.addEventListener('change', function () {
+        nbLine = nbLineSlider.value;
+        initLines();
+    });
+
+    marginSlider.addEventListener('change', function () {
+        marginTopBottom = Number(marginSlider.value);
+        initLines();
+    });
+
+
+
+}
+
+
 function init() {
 
     audio = new Audio();
@@ -133,9 +169,18 @@ function init() {
 
     initLines();
 
-    window.addEventListener( 'resize', onResize);
+    initSlider();
+
+    initEvent();
 
    updateFrame();
+
+
+
+
+
+
+
 }
 
 

@@ -2,41 +2,37 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Lines</title>
+    <title>LinesSound</title>
+
+    <link rel="stylesheet" href="css/styles.css">
 
   </head>
-  <style >
-    body, html {
-      margin : 0;
-      padding : 0;
-      width : 100%;
-      height : 100%;
-      background-color: black;
-    }
 
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    canvas {
-      border-left: 1px solid white;
-      border-right: 1px solid white;
-    }
-
-    audio{
-      display: none;
-    }
-
-
-  </style>
   <body>
-    <div class="container">
-      <canvas id="canvas" width="700" height="600"></canvas>
-      <audio src="/audio/sound.mp3" controls id="audioElement"></audio>
+
+  <div id="sliders-container">
+
+    <div id="slider-nb-line">
+      <label for="nb-line">Nombre de lignes</label>
+      <input id="nb-line" type="range" min="1" max="50" step="1">
     </div>
 
+    <div id="slider-margin-top-bottom">
+      <label for="margin-top-bottom">Margin top-bottom</label>
+      <input id="margin-top-bottom" type="range" min="0" max="100" step="10">
+    </div>
+
+  </div>
+
+
+
+
+
+    <div class="container">
+      
+      <canvas id="canvas"></canvas>
+      <audio src="/audio/sound.mp3" controls id="audioElement"></audio>
+    </div>
 
 
 
