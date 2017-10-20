@@ -6,7 +6,6 @@ function Particle(baseX, baseY, angle, radius, color){
     this.radius = radius;
     this.amplitudeBase = 0;
     this.color = color;
-    this.incrementTime = 0.0005;
 
 
     this.noise = simplex.noise2D(Math.cos(this.angle), Math.sin(this.angle)) * this.amplitudeBase;
@@ -37,7 +36,7 @@ Particle.prototype = {
 
     update : function (everageNumber) {
 
-       time += this.incrementTime / nbLine;
+       time += speed / nbLine;
         //time += this.everageNumberTime / nbLine;
 
 

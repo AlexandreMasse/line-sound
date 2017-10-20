@@ -5,7 +5,8 @@ const canvas = document.getElementById('canvas'),
     marginSlider = document.getElementById("margin-top-bottom"),
     nbParticleSlider = document.getElementById("nb-particle"),
     fadeSlider = document.getElementById("fade"),
-    amplitudeMultSlider = document.getElementById("amplitude-mult");
+    amplitudeMultSlider = document.getElementById("amplitude-mult"),
+    speedSlider = document.getElementById("speed");
    //audioElement = document.getElementById('audioElement'),
 
 
@@ -13,19 +14,20 @@ let canvasWidth,
     canvasHeight,
     lines = [],
     audio,
-    allData = [];
+    allData = [],
     time = 0;
 
 var nbLine = 5,
     marginTopBottom = 80,
     nbParticle = 40,
     amplitudeMult = 0.3,
-    fade = 0.15;
+    fade = 0.15,
+    speed = 0.0005;
 
 
 function initCanvasSize() {
-    canvasWidth = window.innerWidth * 0.7;
-    canvasHeight = window.innerHeight * 0.7;
+    canvasWidth = window.innerWidth * 0.9;
+    canvasHeight = window.innerHeight * 0.75;
 
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
@@ -151,6 +153,8 @@ function initSlider() {
 
     amplitudeMultSlider.value = amplitudeMult;
 
+    speedSlider.value = speed;
+
 }
 
 
@@ -182,6 +186,12 @@ function initEvent() {
         amplitudeMult = Number(amplitudeMultSlider.value);
         initLines();
     });
+
+    speedSlider.addEventListener('change', function () {
+        speed = Number(speedSlider.value);
+        initLines();
+    });
+
 
 }
 

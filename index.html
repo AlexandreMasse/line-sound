@@ -14,7 +14,7 @@
 
     <div id="slider-nb-line">
       <label for="nb-line">Nombre de lignes</label>
-      <input id="nb-line" type="range" min="1" max="50" step="1">
+      <input id="nb-line" type="range" min="1" max="42" step="1">
     </div>
 
     <div id="slider-margin-top-bottom">
@@ -34,12 +34,13 @@
 
     <div id="slider-amplitude-mult">
       <label for="amplitude-mult">Amplitude</label>
-      <input id="amplitude-mult" type="range" min="0" max="5" step="0.05">
+      <input id="amplitude-mult" type="range" min="0" max="3" step="0.05">
     </div>
 
-
-
-
+    <div id="slider-speed">
+      <label for="speed">Vitesse</label>
+      <input id="speed" type="range" min="0.00001" max="0.005" step="0.00001">
+    </div>
 
 
   </div>
@@ -47,11 +48,10 @@
 
 
 
-
     <div class="container">
       
       <canvas id="canvas"></canvas>
-      <audio src="/audio/sound.mp3" controls id="audioElement"></audio>
+      <!--<audio src="/audio/sound.mp3" controls id="audioElement"></audio>-->
     </div>
 
 
