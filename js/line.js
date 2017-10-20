@@ -45,7 +45,6 @@ Line.prototype = {
 
     render : function (everageNumber) {
 
-        //console.log(everageNumber);
 
         //Render and update particles
         for (let i = 0; i < this.nbParticle + 1; i++ ) {

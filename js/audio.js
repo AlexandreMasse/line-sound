@@ -3,8 +3,7 @@ function Audio() {
     window.AudioContext=window.AudioContext||window.webkitAudioContext||window.mozAudioContext;
 
     this.audioCtx = new AudioContext();
-    //this.audioBuffer;
-    //this.audioSource;
+
     this.analyser = this.audioCtx.createAnalyser();
     this.analyser.minDecibels = -110;
 
@@ -43,9 +42,6 @@ Audio.prototype = {
                 // play sound
                 this.audioSource.start();
 
-                //addListeners();
-                //this.frame();
-
             }.bind(this),
                 function(){
 
@@ -67,8 +63,6 @@ Audio.prototype = {
 
         this.analyser.getByteFrequencyData(this.frequencyData);
 
-        //Remove Highest Frequency Data (20%)
-        //this.frequencyData.splice(Math.floor((this.frequencyData.length - 1) * 0.8 ));
 
         return this.frequencyData;
     },

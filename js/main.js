@@ -7,7 +7,6 @@ const canvas = document.getElementById('canvas'),
     fadeSlider = document.getElementById("fade"),
     amplitudeMultSlider = document.getElementById("amplitude-mult"),
     speedSlider = document.getElementById("speed");
-   //audioElement = document.getElementById('audioElement'),
 
 
 let canvasWidth,
@@ -31,8 +30,6 @@ function initCanvasSize() {
 
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
-    //canvasWidth = canvas.width ;
-   //canvasHeight = canvas.height;
 
     canvas.style.width = canvasWidth + 'px';
     canvas.style.height = canvasHeight + 'px';
@@ -55,26 +52,16 @@ function updateFrame(){
 
     requestAnimationFrame(updateFrame);
 
-    //ctx.clearRect(0,0, canvas.width, canvas.height);
-    //ctx.beginPath();
-    //ctx.save();
-
     //Fade effect
     ctx.fillStyle = 'rgba(0,0,0,' + fade + ')';
     ctx.fillRect(0,0, canvasWidth, canvasHeight);
-
-    //ctx.restore();
-    //ctx.closePath();
-
 
 
     //Get Data
     allData = audio.getFrequencyData();
 
-
     //Remove Highest Frequency Data (10%)
     allData = allData.slice(0, Math.floor((allData.length - 1) * 0.90 ));
-
 
     //Caculate average for each line
     const everageData = [];
@@ -91,15 +78,10 @@ function updateFrame(){
             cumul += allData[j];
         }
 
-        //console.log('Line : ' + i + ' compteur : ' + compteur);
-        //console.log('Line : ' + i + ' début : ' + debut + ' fin : ' + fin);
-
         everageCurrent = cumul / (fin - debut);
 
         everageData.push(everageCurrent);
     }
-
-    //console.log(everageData);
 
     //Render lines
     for(let i= 0; i < nbLine; i++ ){
@@ -216,8 +198,12 @@ function init() {
 
 
 setTimeout(function () {
+    const intro = document.getElementById("intro");
+    intro.style.opacity = "0"
+}, 4000);
+
+
+
+setTimeout(function () {
     init();
-}, 1500);
-
-
-
+}, 4500);

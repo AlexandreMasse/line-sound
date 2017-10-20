@@ -37,8 +37,6 @@ Particle.prototype = {
     update : function (everageNumber) {
 
        time += speed / nbLine;
-        //time += this.everageNumberTime / nbLine;
-
 
         this.noise = simplex.noise2D(Math.cos(this.angle) + ( time + everageNumber / 150 ), Math.sin(this.angle) + (time + everageNumber / 150 )) * (this.amplitudeBase + (everageNumber * amplitudeMult));
 
