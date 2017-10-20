@@ -2,7 +2,8 @@ const canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     simplex = new SimplexNoise(),
     nbLineSlider = document.getElementById("nb-line"),
-    marginSlider = document.getElementById("margin-top-bottom");
+    marginSlider = document.getElementById("margin-top-bottom"),
+    nbParticleSlider = document.getElementById("nb-particle");
    //audioElement = document.getElementById('audioElement'),
 
 
@@ -12,11 +13,11 @@ let canvasWidth,
     audio,
     allData = [];
     time = 0,
-    nbParticle = 40,
     amplitudeMult = 0.3;
 
 var nbLine = 2,
-    marginTopBottom = 15;
+    marginTopBottom = 50,
+    nbParticle = 40;
 
 
 function initCanvasSize() {
@@ -138,6 +139,8 @@ function initSlider() {
     marginSlider.value = marginTopBottom;
     marginSlider.max = canvasHeight;
 
+    nbParticleSlider.value = nbParticle;
+
 }
 
 
@@ -146,12 +149,17 @@ function initEvent() {
     window.addEventListener('resize', onResize);
 
     nbLineSlider.addEventListener('change', function () {
-        nbLine = nbLineSlider.value;
+        nbLine = Number(nbLineSlider.value);
         initLines();
     });
 
     marginSlider.addEventListener('change', function () {
         marginTopBottom = Number(marginSlider.value);
+        initLines();
+    });
+
+    nbParticleSlider.addEventListener('change', function () {
+        nbParticle = Number(nbParticleSlider.value);
         initLines();
     });
 
