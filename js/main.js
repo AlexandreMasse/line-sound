@@ -3,7 +3,9 @@ const canvas = document.getElementById('canvas'),
     simplex = new SimplexNoise(),
     nbLineSlider = document.getElementById("nb-line"),
     marginSlider = document.getElementById("margin-top-bottom"),
-    nbParticleSlider = document.getElementById("nb-particle");
+    nbParticleSlider = document.getElementById("nb-particle"),
+    fadeSlider = document.getElementById("fade"),
+    amplitudeMultSlider = document.getElementById("amplitude-mult");
    //audioElement = document.getElementById('audioElement'),
 
 
@@ -12,12 +14,13 @@ let canvasWidth,
     lines = [],
     audio,
     allData = [];
-    time = 0,
-    amplitudeMult = 0.3;
+    time = 0;
 
-var nbLine = 2,
-    marginTopBottom = 50,
-    nbParticle = 40;
+var nbLine = 5,
+    marginTopBottom = 80,
+    nbParticle = 40,
+    amplitudeMult = 0.3,
+    fade = 0.15;
 
 
 function initCanvasSize() {
@@ -54,7 +57,7 @@ function updateFrame(){
     //ctx.save();
 
     //Fade effect
-    ctx.fillStyle = 'rgba(0,0,0, 0.15)';
+    ctx.fillStyle = 'rgba(0,0,0,' + fade + ')';
     ctx.fillRect(0,0, canvasWidth, canvasHeight);
 
     //ctx.restore();
@@ -110,15 +113,18 @@ function initLines() {
     //Delete current Lines
     lines = [];
 
-   /* if (marginTopBottom > canvasHeight) {
-        marginTopBottom = canvasHeight
-    }*/
 
-    let gapYLine = marginTopBottom;
+
+    var gapYLine = marginTopBottom;
+
+    //Center line if she is alone
+    if(nbLine === 1) {
+        gapYLine = canvasHeight / 2;
+    }
+
+
     let angleStart = 0;
 
-
-    console.log(typeof gapYLine);
 
     //Create lines
     for (let i = 0; i < nbLine; i++) {
@@ -140,6 +146,10 @@ function initSlider() {
     marginSlider.max = canvasHeight;
 
     nbParticleSlider.value = nbParticle;
+
+    fadeSlider.value = fade;
+
+    amplitudeMultSlider.value = amplitudeMult;
 
 }
 
@@ -163,7 +173,15 @@ function initEvent() {
         initLines();
     });
 
+    fadeSlider.addEventListener('change', function () {
+        fade = Number(fadeSlider.value);
+        initLines();
+    });
 
+    amplitudeMultSlider.addEventListener('change', function () {
+        amplitudeMult = Number(amplitudeMultSlider.value);
+        initLines();
+    });
 
 }
 
@@ -181,13 +199,7 @@ function init() {
 
     initEvent();
 
-   updateFrame();
-
-
-
-
-
-
+    updateFrame();
 
 }
 

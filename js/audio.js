@@ -11,7 +11,7 @@ function Audio() {
     this.analyser.fftSize = 1024;
     this.bufferSize = this.analyser.frequencyBinCount;
 
-    //Create array of datd
+    //Create array of data
     this.frequencyData = new Uint8Array(this.bufferSize);
 
 }
@@ -30,7 +30,6 @@ Audio.prototype = {
 
                 // success callback
                 this.audioBuffer = buffer;
-                console.log(this.audioBuffer);
 
                 // Create sound from buffer
                 this.audioSource = this.audioCtx.createBufferSource();
